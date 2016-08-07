@@ -1,0 +1,11 @@
+.editor {
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    border: none;
+    height: 400px;
+    padding: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    cursor: pointer;
+}

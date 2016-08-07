@@ -1,0 +1,15 @@
+{
+  "name": "inbox-md",
+  "version": "0.1.0",
+  "description": "",
+  "main": "content.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Koen Vendrik <k.vendrik@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^0.3.6",
+    "highlightjs": "^8.7.0"
+  }
+}

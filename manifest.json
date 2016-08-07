@@ -1,0 +1,19 @@
+{
+    "name": "inbox-md",
+    "version": "0.1.0",
+    "manifest_version": 2,
+    "content_scripts": [{
+        "matches": ["http://*/*", "https://*/*"],
+        "js": [
+            "node_modules/highlightjs/highlight.pack.min.js",
+            "node_modules/marked/lib/marked.js",
+            "inc/highlightjs/default-css.js",
+            "inc/utils.js",
+        	"inc/inboxMd.js",
+            "main.js"
+       	],
+        "css": [
+            "main.css"
+        ]
+    }]
+}
