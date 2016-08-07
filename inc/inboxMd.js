@@ -23,7 +23,7 @@ const inboxMd = {
 	},
 
 	_insertPlugin(editorCount){
-		const previewEl = this._previewEl = document.querySelector('#aR-'+editorCount);
+		const previewEl = document.querySelector('#aR-'+editorCount);
 		const parentEl = previewEl.parentNode;
 
 		// hide inbox editor
@@ -36,15 +36,16 @@ const inboxMd = {
 		}
 
 		//append editor
-		const editorEl = this._editorEl = this._getEditorEl(previewEl);
-		parentEl.appendChild(editorEl);
+		const editorWapperEl = document.createElement('div');
+		parentEl.appendChild(editorWapperEl);
+		this._editor = this._insertEditor(editorWapperEl);
 
 		//add switch button
-		const btnEl = this._getButtonEl(editorEl, previewEl);
+		const btnEl = this._getButtonEl(editorWapperEl, previewEl);
 		parentEl.appendChild(btnEl);
 	},
 
-	_getButtonEl(editorEl, previewEl){
+	_getButtonEl(editorWapperEl, previewEl){
 		const el = document.createElement('a');
 		el.className = 'btn';
 		el.innerHTML = 'Switch to preview';
@@ -53,12 +54,12 @@ const inboxMd = {
 			const target = e.target;
 
 			if (target.innerHTML === 'Switch to preview') {
-                this._parseMdToPreview();
-				editorEl.style = 'display:none;';
+                this._parseMdToPreview(previewEl);
+				editorWapperEl.style = 'display:none;';
 				previewEl.style = '';
 				target.innerText = 'Switch to markdown';
 			} else {
-				editorEl.style = '';
+				editorWapperEl.style = '';
 				previewEl.style = 'display:none;';
 				target.innerText = 'Switch to preview';
 			}
@@ -67,9 +68,9 @@ const inboxMd = {
 		return el;
 	},
 
-	_parseMdToPreview(){
+	_parseMdToPreview(previewEl){
         // parse markdown to str
-		const mdHTML = marked(this._editorEl.value);
+		const mdHTML = marked(this._editor.getValue());
 			
         // parse md string to nodes
 		const frag = document.createElement('div');
@@ -85,23 +86,22 @@ const inboxMd = {
 		});
 
         // append all parsed data to preview
-        this._previewEl.innerHTML = '';
-		this._previewEl.appendChild(frag);
+        previewEl.innerHTML = '';
+		previewEl.appendChild(frag);
 	},
 
-	_getEditorEl(previewEl){
+	_insertEditor(parentEl){
 		const el = document.createElement('textarea');
 		el.className = 'editor';
 		el.placeholder = 'Start typing...';
-
-		el.addEventListener('keydown', (e) => {
-			if (e.keyCode === 9) {
-				e.preventDefault();
-				utils.insertAtCaret('\t');
-			}
-		}, false);
 		
-		return el;
+		parentEl.appendChild(el);
+
+		return CodeMirror.fromTextArea(el, {
+			lineNumbers: true,
+			mode: 'gfm', //Github Flavored Markdown
+			theme: 'default'
+		});
 	}
 
 };
