@@ -9,3 +9,12 @@
     padding: 10px 20px;
     cursor: pointer;
 }
+
+.CodeMirror {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.CodeMirror pre.CodeMirror-placeholder {
+	color: #999;
+}

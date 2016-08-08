@@ -98,7 +98,7 @@ const inboxMd = {
 		parentEl.appendChild(el);
 
 		return CodeMirror.fromTextArea(el, {
-			lineNumbers: true,
+			lineNumbers: false,
 			mode: 'gfm', //Github Flavored Markdown
 			theme: 'default'
 		});

@@ -9,6 +9,7 @@
             "node_modules/codemirror/lib/codemirror.js",
 
             // codemirror addons & modes for github flavored markdown
+            "node_modules/codemirror/addon/display/placeholder.js",
             "node_modules/codemirror/addon/mode/overlay.js",
             "node_modules/codemirror/mode/markdown/markdown.js",
             "node_modules/codemirror/mode/gfm/gfm.js",
